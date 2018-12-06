@@ -1,0 +1,25 @@
+{
+    "meal_category": "chicken",
+    "title": "Test chicken recipe",
+    "ingredients": [
+        "ingredient 1",
+        "ingredient 2",
+        "ingredient 3"
+    ],
+    "time": 2,
+    "difficulty": 1,
+    "vegan": "false",
+    "calories": 1500,
+    "upvotes": 5,
+    "wine": {
+        "name": "test wine",
+        "description": "test wine description",
+        "cost": 1
+    },
+    "image": "http://www.dnnsoftware.com/Content/Dnn.Platform/Documentation/Resources/Images/Admin/AdvURLManagement/AdvURLManagement_TestURL_650x374.png",
+    "steps": {
+        "step 1": "test step 1",
+        "step 2": "test step 2",
+        "step 3": "test step 3"
+    }
+}
