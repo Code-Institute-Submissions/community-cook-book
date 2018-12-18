@@ -1,0 +1,117 @@
+/* Personal styles kept separate from the creative.css to keep a separation between library/personal styles.
+   Some of the styles in creative.css have been edited to be different from the default bootstrap theme css.
+*/
+
+/* navbar styles */
+
+#mainNav .navbar-nav>li.nav-item>a.nav-hot {
+    color: #FF6037;
+}
+
+#mainNav .navbar-nav>li.nav-item>a.nav-hot:hover {
+    color: #ff8e71;
+}
+
+#mainNav.navbar-shrink .navbar-nav>li.nav-item>a.nav-hot {
+    color: #FF6037;
+}
+
+#mainNav.navbar-shrink .navbar-nav>li.nav-item>a.nav-hot:hover {
+    color: #ff8e71;
+}
+
+
+/* remove bullet point from info lists */
+
+ul {
+    list-style-type: none;
+}
+
+
+
+/* black box behind text */
+
+.black-box {
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* list styles */
+
+.list-padding {
+    padding-left: 0;
+}
+
+/* submit recipe button */
+
+.btn-light {
+    color: #FF6037;
+}
+
+.btn-light:hover {
+    color: #ff8e71;
+}
+
+/* recipe submit form style */
+
+.form-width {
+    width: 66%;
+}
+
+.label-text {
+    color: rgb(255,255,255,0.7);
+}
+
+
+.icon-style {
+    font-size: 28px;
+    margin-right: 15px;
+    margin-bottom: .5rem;
+    color: rgb(255,255,255,0.7);
+    min-width: 30px;
+    
+}
+
+.icon-margin {
+    margin: 2px;
+}
+
+.icon1 {
+    color: yellow;
+}
+
+.icon2 {
+    color: #F05F40;
+}
+
+.icon3 {
+    color: red;
+}
+
+.step-button {
+    background-color: transparent;
+    color: rgb(247, 85, 44);
+    border-color: rgb(247,85,44);
+    border-width: thin;
+    cursor: pointer;
+}
+
+.step-button:hover {
+    background-color: rgb(0,0,0,0.5);
+}
+
+.step-button:active,
+.step-button:focus,
+.step-button:visited{
+    outline:none;
+}
+
+.fa-dollar-sign {
+    width: 12px;
+}
+
+#steps-div {
+    margin-bottom: 0;
+    
+}

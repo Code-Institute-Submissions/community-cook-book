@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+
+
+
+<header class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row black-box">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="text-uppercase">
+                    <strong>The personal cook book of the internet</strong>
+                </h1>
+                <hr>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <p class="mb-5">Feel free to browse our library of pre-loaded recipes, or even submit a recipe yourself. Remember to upvote any recipes you love!</p>
+                <a class="btn btn-primary btn-xl" href="/">Browse Recipes</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading text-white">We have the recipe you need</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-4">With an ever growing database of recipes for you to try, you will never go without ideas and inspiration after vising the Community Cook Book.</p>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="fas fa-utensils"></i> Variety</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">With a huge amount of variety in our dishes there is always something new to try</p>
+                <ul>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> beef dishes</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> pork dishes</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> lamb dishes</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> vegetarian dishes</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> desserts</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="fas fa-dollar-sign"></i> Price</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">Find a meal that has a price point suitable for any occasion</p>
+                <ul>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> Cheap meals, for a quiet night in</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> Medium priced meals, perfect for any dinner date</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> Expensive meals, for when you want to go all out</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="far fa-clock"></i> Speed</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">Whether its a quick snack or an all day dinner party, we have a recipe for you.</p>
+                <ul>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> Quick meals, for a lightning fast snack</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> Mid length meals, useful for any night of the week</li>
+                    <li class="list-padding text-faded mb-2"><strong>X</strong> All day meals, where length times produce amazing results</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="text-white"><strong>Have a recipe we don't? Be sure to submit it here!</strong></p>
+                <a class="btn btn-light btn-xl" href="/add_recipe">Submit Recipe!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

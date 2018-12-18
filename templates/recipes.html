@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for recipe in recipes %}
+    <li>
+        <ul><strong>{{recipe.title}}</strong></ul>
+        <ul><strong>Category: </strong>{{recipe.meal_category}}</ul>
+        <ul>
+            {% for ingredient in recipe['ingredients'] %}
+            <li>{{ingredient}}</li>
+            {% endfor %}
+        </ul>
+        <ul>Time taken: {{recipe.time}}</ul>
+        
+        
+       
+    </li>
+    <hr class="dark my-4">
+    {% endfor %}
+{% endblock %}

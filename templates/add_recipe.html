@@ -1,0 +1,150 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading text-white">Share your passion with the world</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-4">The Community Cook Book is the perfect place to share your recipes with the world. Simply fill out the form below, and let the internet taste your creation.</p>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="far fa-edit"></i> Create</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">Create and practice your recipe until it is the perfect dish</p>
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="far fa-check-circle"></i> Submit</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">Submit your recipe to the site. Make sure to include all the details needed to perfectly recreate the meal</p>
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <h2 class="section-heading text-white"><i class="fas fa-poll"></i> Vote</h2>
+                <hr class="light my-4">
+                <p class="text-white mb-5">Vote! Top voted meals will be seen by more people, so make sure to vote on any you like!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-4">
+                <h2 class="section-heading text-white">Recipe Submission Form</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-0">After your recipe is submitted and approved, it will be available for the whole internet to try!</p>
+                <small class="text-faded mb-4">All fields are required to submit a recipe.</small>
+            </div>
+        </div>
+
+        <form class="form-width mx-auto" method="POST" action="{{url_for('insert_recipe')}}">
+            <!-- name -->
+            <div class="form-group">
+                <label for="name" class="label-text">Name <em>- This will be displayed, submit 'anonymous' if you wish</em></label>
+                <input type="name" name="username" class="form-control" id="name" placeholder="Name" required>
+            </div>
+
+            <!-- title of recipe -->
+            <div class="form-group">
+                <label for="title" class="label-text">Title</label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="Recipe Title" required>
+            </div>
+
+            <!-- meat category -->
+            <div class="form-group">
+                <label for="categorySelect" class="label-text">Recipe Category</label>
+                <select class="form-control" id="category" name="meal_category" required>
+                  <option value="placeholder"selected disabled>Choose Recipe Category</option>
+                  {% for cat in categories %}
+                  <option value="{{cat.meal_category}}">{{cat.meal_category}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+
+            <!-- time -->
+            <div>
+                <label class="icon-style"><i class="far fa-clock"></i></label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime1" value="Fast" required>
+                    <label class="form-check-label icon1" for="recipePrice1"><i class="far fa-hourglass icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime2" value="medium" required>
+                    <label class="form-check-label icon2" for="recipeTime2"><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime3" value="Long" required>
+                    <label class="form-check-label icon3" for="recipeTime3"><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i></label>
+                </div>
+            </div>
+            <!-- price -->
+
+            <div>
+                <label class="icon-style"><i class="fas fa-hand-holding-usd"></i></label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice1" value="cheap" required>
+                    <label class="form-check-label icon1" for="recipePrice1"><i class="fas fa-dollar-sign icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice2" value="medium" required>
+                    <label class="form-check-label icon2" for="recipePrice2"><i class="fas fa-dollar-sign icon-margin"></i></i><i class="fas fa-dollar-sign icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice3" value="expensive" required>
+                    <label class="form-check-label icon3" for="recipePrice3"><i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i></label>
+                </div>
+            </div>
+
+            <!-- calories -->
+
+            <div>
+                <img src="/static/img/caloric-energy.png" alt="calorie icon" height="30" width="30" class="icon-style"></img>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories1" value="low" required>
+                    <label class="form-check-label icon1" for="recipeCalories1"><i class="fas fa-fire icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories2" value="medium" required>
+                    <label class="form-check-label icon2" for="recipeCalories2"><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i></label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories3" value="high" required>
+                    <label class="form-check-label icon3" for="recipeCalories3"><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i></label>
+                </div>
+            </div>
+
+            <!-- ingredients textarea -->
+            <div class="form-group">
+                <label for="ingredientTextarea" class="label-text" required>Ingredients</label>
+                <textarea class="form-control" name="ingredients" id="ingredientTextarea" rows="5" placeholder="Please submit ingredients, including quantities, comma separated. &#10 For example:&#10 150g flour, 2 eggs, 100g sugar"></textarea>
+            </div>
+
+            <!-- steps -->
+
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading text-white">Creation Steps</h2>
+                    <p class="text-faded mb-4">Click the plus symbol to add more steps. Hit submit when you are done!</p>
+                    <hr class="light my-4">
+                </div>
+            </div>
+
+            <div class="form-group" id="steps-div">
+                <input type="text" name="step" class="form-control" id="step" placeholder="Step 1" required><br>
+                <input type="text" name="step" class="form-control" id="step" placeholder="Step 2"><br>
+            </div>
+            <button type="button" onclick="addStep()" class="step-button"><i class="fas fa-plus"></i></button>
+            
+            <div class="col-lg-8 mx-auto text-center">
+                
+                <button type="submit" class="btn btn-primary btn-l text-center">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
