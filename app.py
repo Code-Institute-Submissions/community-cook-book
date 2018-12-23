@@ -3,6 +3,10 @@ from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
+
+
+
+
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'cook_book'
@@ -31,11 +35,14 @@ def make_list(data):
 @app.route("/")
 def index():
     return render_template('index.html')
+    
 
 @app.route("/recipes")
 
 ##main page with the links to all recipes and options to filter/search
 def recipes():
+    
+   
     return render_template("recipes.html", 
     recipes=mongo.db.recipe.find())
     
@@ -68,7 +75,9 @@ def insert_recipe():
         "price": request.form["price"],
         "calories": request.form["calories"],
         "ingredients": ingredients_list,
-        "steps": steps_list
+        "steps": steps_list,
+        "upvotes": 1
+    
     }
     
     recipes.insert_one(recipe_dict)
