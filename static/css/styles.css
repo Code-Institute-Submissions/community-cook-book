@@ -150,7 +150,7 @@ ul {
 }
 
 .recipe-image {
-    height: 250px;
+    height: 300px;
     width: 100%;
     background-size: cover;
     
@@ -205,6 +205,8 @@ ul {
 .card-title {
     padding-top: 10px;
     color:#F05F40;
+    height: 70px;
+    display: inline-block;
 }
 
 
@@ -236,3 +238,7 @@ ul {
     text-decoration: none;
 }
 
+
+.extra-height {
+    height: 70px;
+}

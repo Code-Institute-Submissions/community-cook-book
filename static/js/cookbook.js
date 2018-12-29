@@ -19,3 +19,13 @@ $("#toggle").click(function() {
 });
 
 
+
+
+function getPage(page_number){
+    $.get("/recipes/" + page_number, function(data) {
+        $("#recipe-wrapper").html(data);
+    })
+    
+}
+
+
