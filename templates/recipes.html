@@ -13,11 +13,13 @@
         <div class="row">
             <div class="col-lg-4 mx-auto text-center filters-div">
                 <ul class="list-padding label-text">
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Chicken")>Chicken</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Beef")>Beef</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Lamb")>Lamb</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Pork")>Pork</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Vegetarian")>Vegetarian</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Seafood")>Seafood</li>
+                    <li class="filter-list-item" onClick=recipeFilter("Dessert")>Dessert</li>
 
                 </ul>
                 <hr class="light my-4">
@@ -109,16 +111,17 @@
         </div>
         {% endfor %}
     </div>
-</section>
-
 <nav>
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item disabled" id="previous" onClick="lastPage()"><a class="page-link" id="previous" href="#">Previous</a></li>
+        <li class="page-item"><b><a class="page-link" id="button1" href="#">1</a></b></li>
+        <li class="page-item" onClick="nextPage()"><a class="page-link" id="button2" href="#">2</a></li>
+        <li class="page-item" onClick="skipPage()"><a class="page-link" id="button3" href="#">3</a></li>
+        <li class="page-item" onClick="nextPage()"><a class="page-link" href="#">Next</a></li>
     </ul>
 </nav>
+</section>
+
+
 
 {% endblock %}
