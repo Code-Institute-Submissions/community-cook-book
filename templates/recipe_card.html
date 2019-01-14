@@ -3,7 +3,6 @@
 <div class="col-sm-6 col-lg-4 nonblur">
     <a class="link-text" href="/">
         <div class="card">
-
             <!-- image preview loop -->
             {% if recipe.meal_category == 'Beef' %}
             <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/beef.jpg');"></div>
@@ -20,7 +19,6 @@
             {% elif recipe.meal_category == 'Dessert' %}
             <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/dessert.jpg');"></div>
             {% endif %}
-
             <div class="container">
                 <div class="text-center">
                     <h4 class="card-title">{{recipe.title}}</h4>
@@ -30,21 +28,16 @@
                     <!-- time icon loop -->
                     {% if recipe.time == 'Long' %}
                     <i class="far fa-clock icon3 preview-icon"></i> {% elif recipe.time == 'Medium' %}
-
                     <i class="far fa-clock icon2 preview-icon"></i> {% elif recipe.time == "Fast" %}
                     <i class="far fa-clock green-icon preview-icon"></i> {% endif %}
-
                     <!-- price icon loop -->
                     {% if recipe.price == 'Expensive' %}
                     <i class="fas fa-dollar-sign icon-margin icon3 preview-icon"></i> {% elif recipe.price == 'Medium' %}
                     <i class="fas fa-dollar-sign icon-margin icon2 preview-icon"></i> {% elif recipe.price == "Cheap" %}
                     <i class="fas fa-dollar-sign icon-margin green-icon preview-icon"></i> {% endif %}
-
                     <!-- vegetarian icon loop -->
-
                     {% if recipe.meal_category == 'Vegetarian' %}
                     <i class="fas fa-carrot green-icon preview-icon"></i> {% endif %}
-
                 </div>
                 <div class="div-width text-right">
                     <i class="far fa-thumbs-up text-right preview-icon"></i>

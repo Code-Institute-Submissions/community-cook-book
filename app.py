@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -16,15 +16,14 @@ mongo = PyMongo(app)
 
 ## function for returning recipes
 def get_recipes(page_number):
-    recipes = mongo.db.recipe.find().skip((page_number -1) * 6).limit(6)
-                    
-    return recipes
+    recipes = mongo.db.recipe.find().skip((page_number -1) * 6).sort( "upvotes", -1).limit(6)
     
+    return recipes
 
 ## function for returning recipes with filtered meal category
 
-def get_filtered_recipes(meal_type, page_number):
-    recipes = mongo.db.recipe.find({"meal_category" : meal_type}).skip((page_number -1) * 6).limit(6)
+def get_filtered_recipes(filters, page_number):
+    recipes = mongo.db.recipe.find(filters).skip((page_number -1) * 6).sort("upvotes", -1).limit(6)
     
     return recipes
 
@@ -63,14 +62,22 @@ def recipes():
 @app.route("/recipes/gethtml/<page_number>")
 def recipe_page(page_number):
     page_number = int(page_number)
+    
     return render_template("recipe_card.html",  recipes=get_recipes(page_number))
 
 
-@app.route("/recipes/gethtml/<filter>/<page_number>")
-def filtered_recipe_page(filter,page_number):
+@app.route("/recipes/gethtml/<meal_type>/<time>/<price>/<page_number>")
+def filtered_recipe_page(meal_type, time, price ,page_number):
     page_number = int(page_number)
-    meal_type = filter
-    return render_template("recipe_card.html",  recipes=get_filtered_recipes(meal_type, page_number))
+    filters = {}
+    if meal_type != "none":
+        filters["meal_category"] = meal_type
+    if time != "none":
+        filters["time"] = time
+    if price != "none":
+        filters["price"] = price
+    
+    return render_template("recipe_card.html",  recipes=get_filtered_recipes(filters, page_number))
 
 
 ##page to add new recipes to the database

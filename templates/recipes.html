@@ -12,41 +12,48 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 mx-auto text-center filters-div">
-                <ul class="list-padding label-text">
-                    <li class="filter-list-item" onClick=recipeFilter("Chicken")>Chicken</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Beef")>Beef</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Lamb")>Lamb</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Pork")>Pork</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Vegetarian")>Vegetarian</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Seafood")>Seafood</li>
-                    <li class="filter-list-item" onClick=recipeFilter("Dessert")>Dessert</li>
+                <h4 class="section-heading text-white">Main Food Type</h4>
+                <hr class="hr-bottom light my-4">
+                <ul class="list-padding">
+                    <li class="filter-list-item" onClick=meatFilter("Chicken")>Chicken<i class="fas fa-times filters-x"hidden></i></li>
+                    <li class="filter-list-item" onClick=meatFilter("Beef")>Beef</li>
+                    <li class="filter-list-item" onClick=meatFilter("Lamb")>Lamb</li>
+                    <li class="filter-list-item" onClick=meatFilter("Pork")>Pork</li>
+                    <li class="filter-list-item" onClick=meatFilter("Vegetarian")>Vegetarian</li>
+                    <li class="filter-list-item" onClick=meatFilter("Seafood")>Seafood</li>
+                    <li class="filter-list-item" onClick=meatFilter("Dessert")>Dessert</li>
 
                 </ul>
                 <hr class="light my-4">
             </div>
 
             <div class="col-lg-4 mx-auto text-center filters-div">
-                <ul class="list-padding label-text">
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
+                <h4 class="section-heading text-white">Time Taken</h4>
+                <hr class="hr-bottom light my-4">
+                <ul class="list-padding 3-item-list">
+                    <li class="filter-list-item" onClick=timeFilter("Fast")>Quick Meals</li>
+                    <li class="filter-list-item" onClick=timeFilter("Medium")>Average Meals</li>
+                    <li class="filter-list-item" onClick=timeFilter("Long")>All-day Meals</li>
+              
                 </ul>
                 <hr class="light my-4">
             </div>
 
             <div class="col-lg-4 mx-auto text-center filters-div">
+                <h4 class="section-heading text-white">Cost of Meal</h4>
+                <hr class="hr-bottom light my-4">
                 <ul class="list-padding label-text">
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
+                    <li class="filter-list-item" onClick=priceFilter("Cheap")>Budget Meals</li>
+                    <li class="filter-list-item" onClick=priceFilter("Medium")>Everyday Meals</li>
+                    <li class="filter-list-item" onClick=priceFilter("Expensive")>Special Occasions</li>
                 </ul>
-                <hr class="light my-4">
+                <hr class="hr-bottom light my-4">
+            </div>
+            <div class="col-12 text-center">
+                <button onClick="resetFilter()" class="filters-div reset-button btn btn-light">Reset</button>
             </div>
         </div>
+        
     </div>
     <button type="button" id="toggle" class="block-button">Show Filters<i class="fas fa-angle-double-down icon-margin"></i></button>
 </section>
@@ -55,7 +62,7 @@
 <section class="recipe-section">
     <div class="row blurall" id="recipe-wrapper">
         {% for recipe in recipes %}
-        <div class="col-sm-6 col-lg-4 nonblur">
+        <div class="col-sm-6 col-lg-4 nonblur" id="cards">
             <a class="link-text" href="/">
                 <div class="card">
 
@@ -111,13 +118,17 @@
         </div>
         {% endfor %}
     </div>
-<nav>
-    <ul class="pagination">
+{% for message in get_flashed_messages() %}
+<p>hi{{message}}</p>
+{% endfor %}
+
+<nav class="pagination-nav">
+    <ul class="pagination text-center">
         <li class="page-item disabled" id="previous" onClick="lastPage()"><a class="page-link" id="previous" href="#">Previous</a></li>
         <li class="page-item"><b><a class="page-link" id="button1" href="#">1</a></b></li>
         <li class="page-item" onClick="nextPage()"><a class="page-link" id="button2" href="#">2</a></li>
         <li class="page-item" onClick="skipPage()"><a class="page-link" id="button3" href="#">3</a></li>
-        <li class="page-item" onClick="nextPage()"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item" id="next" onClick="nextPage()"><a class="page-link" href="#">Next</a></li>
     </ul>
 </nav>
 </section>

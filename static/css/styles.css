@@ -132,6 +132,50 @@ ul {
 
 .filter-list-item {
     cursor:pointer;
+    color: white;
+    margin-bottom:10px;
+}
+
+.filter-list-item:hover {
+    color: rgb(255, 255, 255, 0.7);
+}
+
+.active-filter {
+    background-color: white;
+    color: #f05f40;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.active-filter:hover {
+    color:#f05f40;;
+}
+
+.filter-x {
+    z-index: 1;
+}
+
+.no-entry-message{
+    margin-bottom:50px;
+}
+
+
+
+.hr-bottom {
+    clear:both;
+}
+
+.pagination-nav {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-flex;
+}
+
+.reset-button {
+    margin-bottom: 10px;
+    text-transform: none!important;
 }
 
 .block-button {
@@ -246,3 +290,4 @@ ul {
 .extra-height {
     height: 70px;
 }
+

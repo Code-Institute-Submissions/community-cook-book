@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label for="categorySelect" class="label-text">Recipe Category</label>
                 <select class="form-control" id="category" name="meal_category" required>
-                  <option value="placeholder"selected disabled>Choose Recipe Category</option>
+                  <option required value="" selected disabled>Choose Recipe Category</option>
                   {% for cat in categories %}
                   <option value="{{cat.meal_category}}">{{cat.meal_category}}</option>
                   {% endfor %}
@@ -71,7 +71,7 @@
                 <label class="icon-style"><i class="far fa-clock"></i></label>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="time" id="recipeTime1" value="Fast" required>
-                    <label class="form-check-label icon1" for="recipePrice1"><i class="far fa-hourglass icon-margin"></i></label>
+                    <label class="form-check-label icon1" for="recipeTime1"><i class="far fa-hourglass icon-margin"></i></label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="time" id="recipeTime2" value="Medium" required>

@@ -1,6 +1,11 @@
 var stepId = 2
 var page = 1
-var filter = "none";
+var meal_type = "none";
+var time = "none";
+var price = "none";
+var no_entries = '<div class="col-12 text-center"><h2 class="no-entry-message">Sorry! No recipes found.</h2></div>'
+
+
 
 function addStep() {
 
@@ -23,6 +28,21 @@ $("#toggle").click(function() {
 
 
 
+// edit the colours of the filters list upon clicking a filter.
+$(".filter-list-item").click(function() {
+        
+        if ($(this).hasClass("active-filter")) {
+            $(this).removeClass("active-filter");
+        }
+       
+        else {
+            $(this).siblings().removeClass("active-filter");
+            $(this).addClass("active-filter");
+        }
+        
+   
+});
+
 // pagination functions 
 
 
@@ -44,21 +64,22 @@ function updateButton() {
 
 // check if filter is added and get url for the new page
 
-function getURL(filter) {
-    if (filter == "none") {
-        $.get("/recipes/gethtml/" + page, function(data) {
+function getURL() {
+    
+    $.get("/recipes/gethtml/" + meal_type + "/" + time + "/" + price + "/" + page, function(data) {
+        data = $.trim(data)
+     if (data.length == 0) {
+           $("#recipe-wrapper").html(no_entries);
+           $("#next").addClass("disabled"); //disable the next page button
+                
+        }
+        else {
             $("#recipe-wrapper").html(data);
+            $("#next").removeClass("disabled");
             console.log(page, "ending page");
-        });
-
-    }
-
-    else {
-        $.get("/recipes/gethtml/" + filter + "/" + page, function(data) {
-            $("#recipe-wrapper").html(data);
-            console.log(page, "ending page");
-        });
-    }
+        }
+    });
+    
     return
 }
 
@@ -66,7 +87,7 @@ function getURL(filter) {
 // will always be current page + 1, aka the next page
 function nextPage() {
     page += 1;
-    getURL(filter);
+    getURL();
     updateButton();
 
 }
@@ -75,7 +96,7 @@ function nextPage() {
 // current page + 2
 function skipPage() {
     page += 2;
-    getURL(filter);
+    getURL();
     updateButton();
 
 }
@@ -85,8 +106,8 @@ function lastPage() {
     
     if (page > 1) {
         page -= 1;
-        getURL(filter);
-        
+        getURL();
+
     }
     else {
         console.log("Already on page 1");
@@ -98,14 +119,58 @@ function lastPage() {
 
 
 
-// function to filter recipes
-function recipeFilter(mealType) {
+// functions to filter recipes. Changing global vars that
+// are passed into getURL(); to whatever filter is clicked
+function meatFilter(meat) {
+    
+    if (meal_type == meat) {
+        meal_type = "none" //resets so on double click it can remove filter
+    }
+    
+    else {
+        meal_type = meat
+    }
+    
     page = 1
-    $.get("/recipes/gethtml/" + mealType + "/" + page, function(data) {
-        $("#recipe-wrapper").html(data);
-        console.log(page, "ending page");
-
-    });
-    filter = mealType
+    getURL();
     updateButton()
 }
+
+function priceFilter(price_var) {
+    
+    if (price == price_var) {
+        price = "none" // reset on double click
+    }
+    
+    else {
+        price = price_var
+    }
+    
+    page = 1
+    getURL();
+    updateButton()
+}
+
+function timeFilter(speed) {
+    
+    if (time == speed) {
+        time = "none" // reset on double click
+    }
+    else {
+        time = speed
+    }
+   
+    page = 1
+    getURL();
+    updateButton()
+}
+
+function resetFilter() {
+    time = "none"
+    price = "none"
+    meal_type = "none"
+    getURL();
+    $(".filter-list-item").removeClass("active-filter");
+}
+
+
