@@ -1,7 +1,7 @@
 
 {% for recipe in recipes %}
 <div class="col-sm-6 col-lg-4 nonblur">
-    <a class="link-text" href="/">
+    <a class="link-text" href="/{{recipe._id}}">
         <div class="card">
             <!-- image preview loop -->
             {% if recipe.meal_category == 'Beef' %}

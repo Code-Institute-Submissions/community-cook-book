@@ -174,3 +174,13 @@ function resetFilter() {
 }
 
 
+// individual recipe page
+
+//scroll back to top of page
+
+
+function topFunction() {
+    
+    document.body.scrollTop = 0;
+    
+}

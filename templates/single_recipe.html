@@ -1,0 +1,147 @@
+{% extends "base.html" %} {%block content %}
+
+<section class="single-recipe-section" id="top">
+    <div class="row">
+
+        <div class="col-lg-1 pr-0 upvote-div text-center">
+            <form method="post" action="/{{recipe._id}}/upvote">
+                <button class="btn btn-link"><i class="fas fa-caret-up vote-arrows"></i></button>
+            </form>
+            <p class="upvote-text-individual">{{recipe.upvotes}}</p>
+            <form method="post" action="/{{recipe._id}}/downvote">
+                <button class="btn btn-link"><i class="fas fa-caret-down vote-arrows"></i></button>
+            </form>
+        </div>
+
+
+        <div class="col-lg-7 pl-0">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="recipe-title text-white">{{ recipe.title }}</h2>
+                    <small class="username-text">Submitted by <a class="username-text" href="/user/{{recipe.username}}"> {{ recipe.username }} </a></small>
+                    <hr class="light-long-hr">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-3 text-center text-white">
+                    <h5>Price</h5>
+                    <hr class="light">
+
+                    <!-- price icon loop -->
+                    {% if recipe.price == "Cheap" %}
+                    <i class="fas fa-dollar-sign icon-margin"></i>
+                    <p class="subtext">Budget Meal</p>
+                    {% elif recipe.price == "Medium" %}
+                    <i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i>
+                    <p class="subtext">Everyday Meal</p>
+                    {% elif recipe.price == "Expensive" %}
+                    <i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i>
+                    <p class="subtext">Special Occasions</p>
+                    {% endif %}
+                </div>
+                <div class="col-lg-3 text-center text-white">
+                    <h5>Time</h5>
+                    <hr class="light">
+
+                    <!-- time icon loop -->
+                    {% if recipe.time == "Fast" %}
+                    <i class="far fa-hourglass icon-margin"></i>
+                    <p class="subtext">Under 20 mins</p>
+                    {% elif recipe.time == "Medium" %}
+                    <i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i>
+                    <p class="subtext">20-60mins</p>
+                    {% elif recipe.time == "Long" %}
+                    <i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i>
+                    <p class="subtext">1 hour+</p>
+                    {% endif %}
+
+                </div>
+                <div class="col-lg-3 text-center text-white">
+                    <h5>Calories</h5>
+                    <hr class="light">
+
+                    <!-- calories icon loop -->
+                    {% if recipe.calories == "Low" %}
+                    <i class="fas fa-fire icon-margin"></i>
+                    <p class="subtext">Low Calories</p>
+                    {% elif recipe.calories == "Medium" %}
+                    <i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i>
+                    <p class="subtext">Average Calories</p>
+                    {% elif recipe.calories == "High" %}
+                    <i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i>
+                    <p class="subtext">High Calories</p>
+                    {% endif %}
+                </div>
+                <div class="col-lg-3 text-center text-white">
+                    {% if recipe.meal_category == "Vegetarian" %}
+                    <h5>Vegetarian</h5>
+                    <hr class="light">
+                    <i class="fas fa-carrot icon-margin"></i>
+                    <p class="subtext">Vegetarian Meal</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- prev image -->
+        <div class="col-lg-4">
+            <!-- recipe image if loop -->
+            {% if recipe.meal_category == 'Beef' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/beef.jpg');"></div>
+            {% elif recipe.meal_category == 'Chicken' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/chicken.jpg');"></div>
+            {% elif recipe.meal_category == 'Pork' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/pork.jpg');"></div>
+            {% elif recipe.meal_category == 'Lamb' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/lamb.jpg');"></div>
+            {% elif recipe.meal_category == 'Seafood' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/seafood.jpg');"></div>
+            {% elif recipe.meal_category == 'Vegetarian' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/vegemeal.jpg');"></div>
+            {% elif recipe.meal_category == 'Dessert' %}
+            <div class="recipe-image individual-image" style="background-image:url('/static/img/preview_imgs/dessert.jpg');"></div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="single-recipe-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-3 text-white text-center ingredients-div">
+            <h5 class="ingredients-header">Ingredients</h5>
+            <hr class="light-long-hr">
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                <li class="ingredient-list">{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-8">
+            {% for step in recipe.steps %}
+            <div class="row width-100">
+                <div class="col-12 step-div">
+                    <h4 class="orange-text steps-header">Step #{{loop.index}}</h4>
+                    <hr class="card-hr">
+                    <p class="orange-text">{{step}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div class="row text-center">
+    <div class="col-12">
+        <button class="btn btn-link orange-text">Edit Recipe</button>
+        <form class="delete-form" onsubmit="return confirm('Are you sure you want to delete?');" action="/{{recipe._id}}/delete">
+            <button class="btn btn-link orange-text">Delete Recipe</button>
+        </form>
+
+        <button onClick="topFunction()" class="btn btn-link orange-text">Back to top</button>
+
+
+    </div>
+</div>
+
+{% endblock %}

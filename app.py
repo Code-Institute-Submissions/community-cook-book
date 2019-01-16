@@ -116,6 +116,59 @@ def insert_recipe():
     recipes.insert_one(recipe_dict)
     return redirect(url_for('recipes'))
     
+## individual recipe pages based on recipe_id
+@app.route("/<recipe_id>")
+def recipe_id(recipe_id):
+    
+    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    
+    return render_template("single_recipe.html", recipe=recipe)
+    
+
+## function to delete a recipe from the database
+@app.route("/<recipe_id>/delete")
+def delete_recipe(recipe_id):
+    
+    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    
+    mongo.db.recipe.remove({"_id": ObjectId(recipe_id)})
+    
+    return redirect(url_for('recipes'))
+
+
+## upvote function
+@app.route("/<recipe_id>/upvote", methods=["POST"])
+def upvote(recipe_id):
+    
+    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
+    new_votes = recipe['upvotes'] + 1
+    
+    new_values = { "$set": {"upvotes": new_votes} }
+    
+    mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, new_values)
+        
+    return redirect(url_for('recipes'))
+    
+## downvote function
+@app.route("/<recipe_id>/downvote", methods=["POST"])
+def downvote(recipe_id):
+    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
+    new_votes = recipe['upvotes'] - 1
+    
+    new_values = { "$set": {"upvotes": new_votes} }
+    
+    mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, new_values)
+    
+    return redirect(url_for('recipes'))
+
+@app.route("/user/<username>")
+def user_page(username):
+    
+    recipes = mongo.db.recipe.find({"username": username}).sort( "upvotes", -1).limit(12)
+    count = mongo.db.recipe.count({"username": username})
+       
+    return render_template("user_page.html",recipes=recipes, username=username, count=count)
+
 
 
 

@@ -63,7 +63,7 @@
     <div class="row blurall" id="recipe-wrapper">
         {% for recipe in recipes %}
         <div class="col-sm-6 col-lg-4 nonblur" id="cards">
-            <a class="link-text" href="/">
+            <a class="link-text" href="/{{recipe._id}}">
                 <div class="card">
 
                     <!-- image preview loop -->
@@ -91,21 +91,26 @@
                         <div class="div-width">
                             <!-- time icon loop -->
                             {% if recipe.time == 'Long' %}
-                            <i class="far fa-clock icon3 preview-icon"></i> {% elif recipe.time == 'Medium' %}
-
-                            <i class="far fa-clock icon2 preview-icon"></i> {% elif recipe.time == "Fast" %}
-                            <i class="far fa-clock green-icon preview-icon"></i> {% endif %}
+                            <i class="far fa-clock icon3 preview-icon"></i> 
+                            {% elif recipe.time == 'Medium' %}
+                            <i class="far fa-clock icon2 preview-icon"></i> 
+                            {% elif recipe.time == "Fast" %}
+                            <i class="far fa-clock green-icon preview-icon"></i> 
+                            {% endif %}
 
                             <!-- price icon loop -->
                             {% if recipe.price == 'Expensive' %}
-                            <i class="fas fa-dollar-sign icon-margin icon3 preview-icon"></i> {% elif recipe.price == 'Medium' %}
-                            <i class="fas fa-dollar-sign icon-margin icon2 preview-icon"></i> {% elif recipe.price == "Cheap" %}
+                            <i class="fas fa-dollar-sign icon-margin icon3 preview-icon"></i> 
+                            {% elif recipe.price == 'Medium' %}
+                            <i class="fas fa-dollar-sign icon-margin icon2 preview-icon"></i> 
+                            {% elif recipe.price == "Cheap" %}
                             <i class="fas fa-dollar-sign icon-margin green-icon preview-icon"></i> {% endif %}
 
                             <!-- vegetarian icon loop -->
 
                             {% if recipe.meal_category == 'Vegetarian' %}
-                            <i class="fas fa-carrot green-icon preview-icon"></i> {% endif %}
+                            <i class="fas fa-carrot green-icon preview-icon"></i>
+                            {% endif %}
 
                         </div>
                         <div class="div-width text-right">
@@ -118,9 +123,6 @@
         </div>
         {% endfor %}
     </div>
-{% for message in get_flashed_messages() %}
-<p>hi{{message}}</p>
-{% endfor %}
 
 <nav class="pagination-nav">
     <ul class="pagination text-center">

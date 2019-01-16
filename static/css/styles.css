@@ -5,6 +5,7 @@
 body,
 html{
     overflow-x: hidden;
+    background-color:#eceaea;
 }
 
 /* navbar styles */
@@ -148,11 +149,7 @@ ul {
 }
 
 .active-filter:hover {
-    color:#f05f40;;
-}
-
-.filter-x {
-    z-index: 1;
+    color:#f05f40;
 }
 
 .no-entry-message{
@@ -167,6 +164,7 @@ ul {
 
 .pagination-nav {
     text-align: center;
+
 }
 
 .pagination {
@@ -201,6 +199,7 @@ ul {
     height: 300px;
     width: 100%;
     background-size: cover;
+    
     
 }
 
@@ -280,6 +279,7 @@ ul {
     font-family:'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-weight: bold;
     font-size: 22px;
+    
 }
 
 .link-text:hover {
@@ -289,5 +289,116 @@ ul {
 
 .extra-height {
     height: 70px;
+}
+
+/* individual recipes */
+
+.single-recipe-section {
+    width: 85%;
+    background-color:#F05F40;
+    margin-top: 100px;
+    border-radius: 12px;
+    margin-left:auto;
+    margin-right: auto;
+    padding:0;
+}
+
+.light-long-hr {
+    color: white;
+    border-color: white;
+    width: 100%;
+    max-width: 100%;
+    
+    
+}
+
+.recipe-title {
+    margin-top: 30px;
+    
+}
+
+.individual-image {
+    border-radius:12px;
+}
+.vote-arrows {
+    font-size: 32px;
+    color: white;
+}
+
+.upvote-text-individual {
+    margin-bottom: 0;
+    color:white;
+    font-family:'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.upvote-div {
+    margin-top: 15px;
+}
+
+.username-text {
+    font-size:12px;
+    color:white;
+}
+
+.username-text a:hover {
+    color: rgb(255, 255, 255, 0.7);
+    text-decoration: none;
+}
+
+.subtext {
+    font-style: italic;
+    font-size:12px;
+    margin-top: 10px;
+}
+
+.ingredients-div {
+  border: 1px solid white;
+  outline-style: solid;
+  outline-color: white;
+  outline-width: thin;
+  margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  
+}
+
+.ingredients-header {
+    margin-top: 10px;
+}
+
+.ingredient-list {
+    margin-bottom: 5px;
+}
+.step-div {
+    width:75%;
+    background-color:#eceaea;
+    border-radius:12px;
+    margin: 10px;
+    box-shadow: 10px 10px 55px -8px rgba(0,0,0,0.75);
+}
+
+.orange-text {
+    color:#F05F40;
+}
+
+.steps-header {
+    margin-top: 10px;
+    font-weight:bold;
+}
+
+.width-100 {
+    width:100%;
+}
+
+.delete-form {
+    display:inline;
+}
+
+.small-text {
+    font-size: 16px;
+    margin-left: 20px;
+    font-style: italic;
 }
 
