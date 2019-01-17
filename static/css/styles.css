@@ -186,6 +186,9 @@ ul {
     cursor: pointer;
     text-align: center;
 }
+.block-button:focus {
+    outline-color: transparent;
+}
 
 .filters-div {
     display: none;
@@ -325,6 +328,10 @@ ul {
     color: white;
 }
 
+.vote-arrows:hover {
+    color:rgba(255, 255, 255, 0.75);
+}
+
 .upvote-text-individual {
     margin-bottom: 0;
     color:white;
@@ -383,6 +390,16 @@ ul {
     color:#F05F40;
 }
 
+.orange-link-text {
+    color:#F05F40;
+    font-size:12px;
+}
+
+.orange-link-text:hover {
+    color:#ea7b63;
+    text-decoration: none;
+}
+
 .steps-header {
     margin-top: 10px;
     font-weight:bold;
@@ -402,3 +419,6 @@ ul {
     font-style: italic;
 }
 
+.fa-home {
+    margin-right: 5px;
+}
