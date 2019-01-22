@@ -3,10 +3,6 @@ from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-
-
-
-
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'cook_book'
@@ -14,20 +10,12 @@ app.config['MONGO_URI'] = 'mongodb://thurco:youtube123@ds129540.mlab.com:29540/c
 
 mongo = PyMongo(app)
 
-## function for returning recipes
-def get_recipes(page_number):
-    recipes = mongo.db.recipe.find().skip((page_number -1) * 6).sort( "upvotes", -1).limit(6)
-    
-    return recipes
 
-## function for returning recipes with filtered meal category
-
-def get_filtered_recipes(filters, page_number):
+## function for returning recipes with filters
+def get_recipes(filters={}, page_number=1):
     recipes = mongo.db.recipe.find(filters).skip((page_number -1) * 6).sort("upvotes", -1).limit(6)
     
     return recipes
-
-
 
 ## function for taking a long string from a textarea and splitting it into a list.
 def make_list(data):
@@ -39,43 +27,41 @@ def make_list(data):
         finished_list = filter(None, spliced_list) ##Filter empty list items
     return finished_list
     
-
 @app.route("/")
 def index():
     
     ## queries for database summary on home page
-    Beef_count = mongo.db.recipe.count({"meal_category": "Beef"})
-    Chicken_count = mongo.db.recipe.count({"meal_category": "Chicken"})
-    Lamb_count = mongo.db.recipe.count({"meal_category": "Lamb"})
-    Seafood_count = mongo.db.recipe.count({"meal_category": "Seafood"})
-    Vegetarian_count = mongo.db.recipe.count({"meal_category": "Vegetarian"})
-    Pork_count = mongo.db.recipe.count({"meal_category": "Pork"})
-    Dessert_count = mongo.db.recipe.count({"meal_category": "Dessert"})
+    beef_count = mongo.db.recipe.count({"meal_category": "Beef"})
+    chicken_count = mongo.db.recipe.count({"meal_category": "Chicken"})
+    lamb_count = mongo.db.recipe.count({"meal_category": "Lamb"})
+    seafood_count = mongo.db.recipe.count({"meal_category": "Seafood"})
+    vegetarian_count = mongo.db.recipe.count({"meal_category": "Vegetarian"})
+    pork_count = mongo.db.recipe.count({"meal_category": "Pork"})
+    dessert_count = mongo.db.recipe.count({"meal_category": "Dessert"})
     
-    Cheap_meal = mongo.db.recipe.count({"price": "Cheap"})
-    Medium_meal = mongo.db.recipe.count({"price": "Medium"})
-    Expensive_meal = mongo.db.recipe.count({"price": "Expensive"})
+    cheap_meal = mongo.db.recipe.count({"price": "Cheap"})
+    medium_meal = mongo.db.recipe.count({"price": "Medium"})
+    expensive_meal = mongo.db.recipe.count({"price": "Expensive"})
     
-    Fast_meal = mongo.db.recipe.count({"time": "Fast"})
-    Everyday_meal = mongo.db.recipe.count({"time": "Medium"})
-    Long_meal = mongo.db.recipe.count({"time": "Long"})
+    fast_meal = mongo.db.recipe.count({"time": "Fast"})
+    everyday_meal = mongo.db.recipe.count({"time": "Medium"})
+    long_meal = mongo.db.recipe.count({"time": "Long"})
     
-    return render_template('index.html', pork=Pork_count, dessert=Dessert_count, 
-    vegetarian=Vegetarian_count, seafood=Seafood_count, lamb=Lamb_count,
-    chicken=Chicken_count, beef=Beef_count,
-    cheap=Cheap_meal, medium=Medium_meal, expensive=Expensive_meal,
-    fast=Fast_meal, everyday=Everyday_meal, Long=Long_meal)
+    return render_template('index.html', pork=pork_count, dessert=dessert_count, 
+                                         vegetarian=vegetarian_count, seafood=seafood_count, 
+                                         lamb=lamb_count, chicken=chicken_count, 
+                                         beef=beef_count, cheap=cheap_meal, medium=medium_meal,
+                                         expensive=expensive_meal, fast=fast_meal, everyday=everyday_meal, 
+                                         Long=long_meal)
     
-
-@app.route("/recipes")
 
 ##main page with the links to all recipes and options to filter/search
+@app.route("/recipes")
+
 def recipes():
     
-    recipes = get_recipes(1)
-    
     return render_template("recipes.html", 
-    recipes=recipes)
+    recipes=get_recipes())
     
 
 
@@ -85,11 +71,11 @@ def recipes():
 def recipe_page(page_number):
     page_number = int(page_number)
     
-    return render_template("recipe_card.html",  recipes=get_recipes(page_number))
+    return render_template("recipe_card.html",  recipes=get_recipes(page_number=page_number))
 
 
 @app.route("/recipes/gethtml/<meal_type>/<time>/<price>/<page_number>")
-def filtered_recipe_page(meal_type, time, price ,page_number):
+def filtered_recipe_page(meal_type, time, price, page_number):
     page_number = int(page_number)
     filters = {}
     if meal_type != "none":
@@ -99,29 +85,22 @@ def filtered_recipe_page(meal_type, time, price ,page_number):
     if price != "none":
         filters["price"] = price
     
-    return render_template("recipe_card.html",  recipes=get_filtered_recipes(filters, page_number))
-
+    return render_template("recipe_card.html",  recipes=get_recipes(filters=filters, page_number=page_number))
 
 ##page to add new recipes to the database
 @app.route("/add_recipe")
 def add_recipe():
-    
     categories = mongo.db.meal_category.find()
-    category_list = [category for category in categories]
-    
-    return render_template("add_recipe.html", categories = category_list)
+   
+    return render_template("add_recipe.html", categories=list(categories))
     
 @app.route("/insert_recipe", methods=["POST"])
 def insert_recipe():
     recipes = mongo.db.recipe
-    
     ingredients_list = make_list(request.form["ingredients"])
-    
-    
     ## all values from the textboxes with a name of 'step'
     steps_list = request.form.getlist('step')
     
-
     recipe_dict = {
         "username": request.form["username"],
         "title": request.form["title"],
@@ -132,55 +111,45 @@ def insert_recipe():
         "ingredients": ingredients_list,
         "steps": steps_list,
         "upvotes": 1
-    
     }
-    
     recipes.insert_one(recipe_dict)
+    
     return redirect(url_for('recipes'))
     
 ## individual recipe pages based on recipe_id
 @app.route("/<recipe_id>")
 def recipe_id(recipe_id):
     
-    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
     
     return render_template("single_recipe.html", recipe=recipe)
     
-
 ## function to delete a recipe from the database
 @app.route("/<recipe_id>/delete")
 def delete_recipe(recipe_id):
     
-    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
-    
+    recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
     mongo.db.recipe.remove({"_id": ObjectId(recipe_id)})
     
     return redirect(url_for('recipes'))
     
-
-
 @app.route("/<recipe_id>/edit")
 def edit_recipe(recipe_id):
     
-    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.meal_category.find()
-    category_list = [category for category in categories]
     
-    return render_template("edit_recipe.html", categories = category_list, recipe=recipe)
+    return render_template("edit_recipe.html", categories=list(categories), recipe=recipe)
 
 ## function to edit a recipe in the database
 @app.route("/<recipe_id>/update", methods=["POST"])
 def update_recipe(recipe_id):
-    
-    
-    
-    
+   
     ## updated ingredients in ingredients textbox
     ingredients_list = make_list(request.form["ingredients"])
     ## all values from the textboxes with a name of 'step'
     steps_list = request.form.getlist('step')
     
-
     recipe_dict = {
         
         "title": request.form["title"],
@@ -190,38 +159,31 @@ def update_recipe(recipe_id):
         "calories": request.form["calories"],
         "ingredients": ingredients_list,
         "steps": steps_list
-
-    
     }
     
-    mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)},{"$set": recipe_dict})
+    mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, {"$set": recipe_dict})
     return redirect(url_for('recipes'))
-
 
 ## upvote function
 @app.route("/<recipe_id>/upvote", methods=["POST"])
 def upvote(recipe_id):
     
-    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
-    new_votes = recipe['upvotes'] + 1
-    
-    new_values = { "$set": {"upvotes": new_votes} }
+    recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
+    new_values = { "$set": {"upvotes": recipe['upvotes'] + 1} }
     
     mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, new_values)
         
-    return redirect(url_for('recipes'))
+    return redirect("/" + recipe_id)
     
 ## downvote function
 @app.route("/<recipe_id>/downvote", methods=["POST"])
 def downvote(recipe_id):
-    recipe=mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
-    new_votes = recipe['upvotes'] - 1
-    
-    new_values = { "$set": {"upvotes": new_votes} }
+    recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)}, {"upvotes": 1})
+    new_values = { "$set": {"upvotes": recipe['upvotes'] - 1} }
     
     mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, new_values)
     
-    return redirect(url_for('recipes'))
+    return redirect("/" + recipe_id)
 
 @app.route("/user/<username>")
 def user_page(username):
@@ -231,12 +193,8 @@ def user_page(username):
        
     return render_template("user_page.html",recipes=recipes, username=username, count=count)
 
-
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
-    port=int(os.environ.get('PORT')),
-    debug=True)
+            port=int(os.environ.get('PORT')),
+            debug=True)
     
-
-
-
