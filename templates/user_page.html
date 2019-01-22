@@ -24,23 +24,10 @@
         <div class="col-sm-6 col-lg-3 nonblur" id="cards">
             <a class="link-text" href="/{{recipe._id}}">
                 <div class="card">
-                    <!-- image preview loop -->
-                    {% if recipe.meal_category == 'Beef' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/beef.jpg');"></div>
-                    {% elif recipe.meal_category == 'Chicken' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/chicken.jpg');"></div>
-                    {% elif recipe.meal_category == 'Pork' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/pork.jpg');"></div>
-                    {% elif recipe.meal_category == 'Lamb' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/lamb.jpg');"></div>
-                    {% elif recipe.meal_category == 'Seafood' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/seafood.jpg');"></div>
-                    {% elif recipe.meal_category == 'Vegetarian' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/vegemeal.jpg');"></div>
-                    {% elif recipe.meal_category == 'Dessert' %}
-                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/dessert.jpg');"></div>
-                    {% endif %}
-
+                    <div class="recipe-image" style="background-image:url('/static/img/preview_imgs/{{ recipe.meal_category.lower() }}.jpg');">
+                        
+                    </div>
+                    
                     <div class="container">
                         <div class="text-center">
                             <h4 class="card-title">{{recipe.title}}</h4>

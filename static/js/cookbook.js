@@ -1,16 +1,16 @@
-var stepId = 2
-var page = 1
+var stepId = 2;
+var page = 1;
 var meal_type = "none";
 var time = "none";
 var price = "none";
-var no_entries = '<div class="col-12 text-center"><h2 class="no-entry-message">Sorry! No recipes found.</h2></div>'
+var no_entries = '<div class="col-12 text-center"><h2 class="no-entry-message">Sorry! No recipes found.</h2></div>';
 
 
 
 function addStep() {
 
     $('#steps-div').append("<input type='text' name='step' id='step[" + stepId + "]' class='form-control' placeholder='Step " + (stepId + 1) + "'><br >");
-    stepId++
+    stepId++;
 }
 
 
@@ -128,47 +128,47 @@ function meatFilter(meat) {
     }
     
     else {
-        meal_type = meat
+        meal_type = meat;
     }
     
-    page = 1
+    page = 1;
     getURL();
-    updateButton()
+    updateButton();
 }
 
 function priceFilter(price_var) {
     
     if (price == price_var) {
-        price = "none" // reset on double click
+        price = "none"; // reset on double click
     }
     
     else {
-        price = price_var
+        price = price_var;
     }
     
-    page = 1
+    page = 1;
     getURL();
-    updateButton()
+    updateButton();
 }
 
 function timeFilter(speed) {
     
     if (time == speed) {
-        time = "none" // reset on double click
+        time = "none"; // reset on double click
     }
     else {
-        time = speed
+        time = speed;
     }
    
-    page = 1
+    page = 1;
     getURL();
-    updateButton()
+    updateButton();
 }
 
 function resetFilter() {
-    time = "none"
-    price = "none"
-    meal_type = "none"
+    time = "none";
+    price = "none";
+    meal_type = "none";
     getURL();
     $(".filter-list-item").removeClass("active-filter");
 }
