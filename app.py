@@ -91,8 +91,9 @@ def filtered_recipe_page(meal_type, time, price, page_number):
 @app.route("/add_recipe")
 def add_recipe():
     categories = mongo.db.meal_category.find()
-   
-    return render_template("add_recipe.html", categories=list(categories))
+    category_list = [category for category in categories]
+    
+    return render_template("add_recipe.html", categories=category_list)
     
 @app.route("/insert_recipe", methods=["POST"])
 def insert_recipe():
@@ -138,8 +139,9 @@ def edit_recipe(recipe_id):
     
     recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.meal_category.find()
+    category_list = [category for category in categories]
     
-    return render_template("edit_recipe.html", categories=list(categories), recipe=recipe)
+    return render_template("edit_recipe.html", categories=category_list, recipe=recipe)
 
 ## function to edit a recipe in the database
 @app.route("/<recipe_id>/update", methods=["POST"])
