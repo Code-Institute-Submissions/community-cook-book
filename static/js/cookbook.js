@@ -13,6 +13,10 @@ function addStep() {
     stepId++;
 }
 
+function addEditArea() {
+    $('#steps-div').append("<textarea type='text' name='step' id='newstep' class='form-control edit-textarea' placeholder='New Step'>");
+}
+
 
 $("#toggle").click(function() {
     $(".filters-div").toggle('slow', function() {

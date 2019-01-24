@@ -102,6 +102,7 @@ def insert_recipe():
     ## all values from the textboxes with a name of 'step'
     steps_list = request.form.getlist('step')
     
+    
     recipe_dict = {
         "username": request.form["username"],
         "title": request.form["title"],
@@ -115,7 +116,16 @@ def insert_recipe():
     }
     recipes.insert_one(recipe_dict)
     
-    return redirect(url_for('recipes'))
+    return redirect(url_for('new_recipe'))
+ 
+## Redirect to new recipe upon submission
+@app.route("/new_recipe")
+def new_recipe():
+    ## find the newest recipe
+    recipe = mongo.db.recipe.find_one(sort=[( '_id', -1 )])
+    
+    return render_template("single_recipe.html", recipe=recipe)
+    
     
 ## individual recipe pages based on recipe_id
 @app.route("/<recipe_id>")
@@ -151,7 +161,8 @@ def update_recipe(recipe_id):
     ingredients_list = make_list(request.form["ingredients"])
     ## all values from the textboxes with a name of 'step'
     steps_list = request.form.getlist('step')
-    
+    filtered_steps_list = filter(None, steps_list) ##users can submit an empty text box by removing
+                                                   ##the text from it. This should remove those from the steps list.
     recipe_dict = {
         
         "title": request.form["title"],
@@ -160,11 +171,11 @@ def update_recipe(recipe_id):
         "price": request.form["price"],
         "calories": request.form["calories"],
         "ingredients": ingredients_list,
-        "steps": steps_list
+        "steps": filtered_steps_list
     }
     
     mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, {"$set": recipe_dict})
-    return redirect(url_for('recipes'))
+    return redirect("/" + recipe_id)
 
 ## upvote function
 @app.route("/<recipe_id>/upvote", methods=["POST"])

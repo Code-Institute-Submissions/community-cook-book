@@ -18,16 +18,19 @@
             <!-- title of recipe -->
             <div class="form-group">
                 <label for="title" class="label-text">Title</label>
-                <input type="text" name="title" maxlength="45" class="form-control" id="title" placeholder="{{recipe.title}}" required>
+                <input type="text" name="title" maxlength="45" class="form-control" id="title" value="{{recipe.title}}" required>
             </div>
 
             <!-- meat category -->
             <div class="form-group">
                 <label for="categorySelect" class="label-text">Recipe Category</label>
                 <select class="form-control" id="category" name="meal_category" required>
-                  <option required value="" selected disabled>Edit Recipe Category</option>
                   {% for cat in categories %}
+                  {% if cat.meal_category == recipe.meal_category %}
+                  <option value="{{cat.meal_category}}"selected>{{cat.meal_category}}</option>
+                  {% else %} 
                   <option value="{{cat.meal_category}}">{{cat.meal_category}}</option>
+                  {% endif %}
                   {% endfor %}
                 </select>
             </div>
@@ -36,15 +39,30 @@
             <div>
                 <label class="icon-style"><i class="far fa-clock"></i></label>
                 <div class="form-check form-check-inline">
+                    {% if recipe.time == 'Fast' %}
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime1" value="Fast" required checked="checked"> 
+                    {% else %}
                     <input class="form-check-input" type="radio" name="time" id="recipeTime1" value="Fast" required>
-                    <label class="form-check-label icon1" for="recipeTime1"><i class="far fa-hourglass icon-margin"></i></label>
+                    {% endif %}
+                    <label class="form-check-label icon1" for="recipeTime1" ><i class="far fa-hourglass icon-margin"></i></label>
+                    
+    
                 </div>
                 <div class="form-check form-check-inline">
+                    {% if recipe.time == 'Medium' %}
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime2" value="Medium" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="time" id="recipeTime2" value="Medium" required>
+                    {% endif %}
                     <label class="form-check-label icon2" for="recipeTime2"><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i></label>
                 </div>
+                
                 <div class="form-check form-check-inline">
+                    {% if recipe.time == 'Long' %}
+                    <input class="form-check-input" type="radio" name="time" id="recipeTime3" value="Long" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="time" id="recipeTime3" value="Long" required>
+                    {% endif %}
                     <label class="form-check-label icon3" for="recipeTime3"><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i><i class="far fa-hourglass icon-margin"></i></label>
                 </div>
             </div>
@@ -53,15 +71,27 @@
             <div>
                 <label class="icon-style"><i class="fas fa-hand-holding-usd"></i></label>
                 <div class="form-check form-check-inline">
+                    {% if recipe.price == 'Cheap' %}
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice1" value="Cheap" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="price" id="recipePrice1" value="Cheap" required>
+                    {% endif %}
                     <label class="form-check-label icon1" for="recipePrice1"><i class="fas fa-dollar-sign icon-margin"></i></label>
                 </div>
                 <div class="form-check form-check-inline">
+                    {% if recipe.price == 'Medium' %}
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice2" value="Medium" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="price" id="recipePrice2" value="Medium" required>
+                    {% endif %}
                     <label class="form-check-label icon2" for="recipePrice2"><i class="fas fa-dollar-sign icon-margin"></i></i><i class="fas fa-dollar-sign icon-margin"></i></label>
                 </div>
                 <div class="form-check form-check-inline">
+                    {% if recipe.price == 'Expensive' %}
+                    <input class="form-check-input" type="radio" name="price" id="recipePrice3" value="Expensive" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="price" id="recipePrice3" value="Expensive" required>
+                    {% endif %}
                     <label class="form-check-label icon3" for="recipePrice3"><i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i><i class="fas fa-dollar-sign icon-margin"></i></label>
                 </div>
             </div>
@@ -71,15 +101,29 @@
             <div>
                 <img src="/static/img/caloric-energy.png" alt="calorie icon" height="30" width="30" class="icon-style"></img>
                 <div class="form-check form-check-inline">
+                    {% if recipe.calories == 'Low' %}
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories1" value="Low" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="calories" id="recipeCalories1" value="Low" required>
+                    {% endif %}
                     <label class="form-check-label icon1" for="recipeCalories1"><i class="fas fa-fire icon-margin"></i></label>
                 </div>
+                
                 <div class="form-check form-check-inline">
+                    {% if recipe.calories == 'Medium' %}
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories2" value="Medium" checked="checked" required>
+                    {% else %}
                     <input class="form-check-input" type="radio" name="calories" id="recipeCalories2" value="Medium" required>
+                    {% endif %}
                     <label class="form-check-label icon2" for="recipeCalories2"><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i></label>
                 </div>
+                
                 <div class="form-check form-check-inline">
+                    {% if recipe.calories == 'High' %}
+                    <input class="form-check-input" type="radio" name="calories" id="recipeCalories3" value="High" required checked="checked">
+                    {% else %}
                     <input class="form-check-input" type="radio" name="calories" id="recipeCalories3" value="High" required>
+                    {% endif %}
                     <label class="form-check-label icon3" for="recipeCalories3"><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i><i class="fas fa-fire icon-margin"></i></label>
                 </div>
             </div>
@@ -87,7 +131,7 @@
             <!-- ingredients textarea -->
             <div class="form-group">
                 <label for="ingredientTextarea" class="label-text" required>Ingredients</label>
-                <textarea class="form-control" name="ingredients" id="ingredientTextarea" rows="5" placeholder="{% for ingredient in recipe.ingredients %}{{ingredient}},{% endfor %}"></textarea>
+                <textarea class="form-control" name="ingredients" id="ingredientTextarea" rows="5">{% for ingredient in recipe.ingredients %}{{ingredient}}&#13;&#10;{% endfor %}</textarea>
             </div>
 
             <!-- steps -->
@@ -101,14 +145,20 @@
             </div>
 
             <div class="form-group" id="steps-div">
-                <input type="text" name="step" class="form-control" id="step" placeholder="Step 1" required><br>
-                <input type="text" name="step" class="form-control" id="step" placeholder="Step 2"><br>
+                {% for step in recipe.steps %}
+                {% if loop.index == 1 %}
+                <textarea rows="4" type="text" name="step" value="{{step}}" class="form-control edit-textarea" id="step" required>{{step}}</textarea>
+                {% else %}
+                <textarea rows="4" type="text" name="step" value="{{step}}" class="form-control edit-textarea" id="step">{{step}}</textarea>
+                {% endif %}
+                {% endfor %}
             </div>
-            <button type="button" onclick="addStep()" class="step-button"><i class="fas fa-plus"></i></button>
+            <button type="button" onclick="addEditArea()" class="step-button"><i class="fas fa-plus"></i></button>
             
             <div class="col-lg-8 mx-auto text-center">
                 
                 <button type="submit" class="btn btn-primary btn-l text-center">Submit</button>
+                <button class="btn btn-primary btn-l text-center" href="/{{recipe_id}}">Cancel</button>
             </div>
         </form>
     </div>
