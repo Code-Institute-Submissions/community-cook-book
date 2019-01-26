@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -206,6 +206,32 @@ def user_page(username):
        
     return render_template("user_page.html",recipes=recipes, username=username, count=count)
 
+
+
+
+@app.route("/db_summary")
+def db_summary():
+    
+    return render_template("db_summary.html")
+    
+@app.route("/db_summary/graph_data")
+def graph_data():
+    result = mongo.db.recipe.aggregate([{
+        "$group": {
+            "_id": "$meal_category",
+            "count": {
+                "$sum": 1
+            }
+        }
+    }])
+    
+    def transform(d):
+        return [d['_id'], d['count']]
+    data_list = [transform(d) for d in result]
+    data_list.insert(0, ["Meal Type", "Count"])
+    return jsonify(data=data_list)
+   
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
             port=int(os.environ.get('PORT')),
