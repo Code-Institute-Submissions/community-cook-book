@@ -214,26 +214,45 @@ def db_summary():
     
     return render_template("db_summary.html")
     
-@app.route("/db_summary/graph_data")
-def graph_data():
-    result = mongo.db.recipe.aggregate([{
-        "$group": {
-            "_id": "$meal_category",
-            "count": {
-                "$sum": 1
+
+def get_graph_data(key, meal_type, time, price):
+    
+    filters = {}
+    if meal_type != "none":
+        filters["meal_category"] = meal_type
+    if time != "none":
+        filters["time"] = time
+    if price != "none":
+        filters["price"] = price
+    
+    
+    result = mongo.db.recipe.aggregate([
+        {
+            "$match": filters
+        },
+        {
+            "$group": {
+                "_id": "$" + key,
+                "count": {
+                    "$sum": 1
+                }
             }
         }
-    }])
+    ])
     
     def transform(d):
         return [d['_id'], d['count']]
     data_list = [transform(d) for d in result]
     data_list.insert(0, ["Meal Type", "Count"])
-    return jsonify(data=data_list)
-   
+    return data_list
+    
+@app.route("/db_summary/graph_data/<key>/<meal_type>/<time>/<price>")
+def graph_data(key, meal_type, time, price):
+    
+    return jsonify(data=get_graph_data(key, meal_type, time, price))
+
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'), 
             port=int(os.environ.get('PORT')),
             debug=True)
-    
