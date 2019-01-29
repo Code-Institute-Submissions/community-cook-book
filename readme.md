@@ -142,6 +142,12 @@ Below is a list of the specific tests that I ran manually.
 ## Deployment
 
 The site is deployed on heroku and can be found at https://thurcos-cook-book.herokuapp.com/
+The app uses Python 2.7.6 and a 'runtime.txt' file has been added to ensure that heroku knows to use this python version.
+
+Heroku Config Vars
+
+IP 0.0.0.0
+PORT 5000
 
 ## Credits
 
