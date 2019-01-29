@@ -5,8 +5,6 @@ var time = "none";
 var price = "none";
 var no_entries = '<div class="col-12 text-center"><h2 class="no-entry-message">Sorry! No recipes found.</h2></div>';
 
-
-
 function addStep() {
 
     $('#steps-div').append("<input type='text' name='step' id='step[" + stepId + "]' class='form-control' placeholder='Step " + (stepId + 1) + "'><br >");
@@ -72,15 +70,14 @@ function getURL() {
     
     $.get("/recipes/gethtml/" + meal_type + "/" + time + "/" + price + "/" + page, function(data) {
         data = $.trim(data)
-     if (data.length == 0) {
-           $("#recipe-wrapper").html(no_entries);
+     if (data.length >= 114 && data.length <= 116) { // data.length can be between 114-116 depending on the
+           $("#recipe-wrapper").html(no_entries);    // amount of characters that {{count}} renders to.
            $("#next").addClass("disabled"); //disable the next page button
-                
         }
         else {
             $("#recipe-wrapper").html(data);
             $("#next").removeClass("disabled");
-            console.log(page, "ending page");
+            
         }
     });
     

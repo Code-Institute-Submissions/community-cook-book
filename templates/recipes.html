@@ -60,7 +60,11 @@
 
 <!-- recipe preview card section -->
 <section class="recipe-section">
+    
     <div class="row blurall" id="recipe-wrapper">
+        <div class="col-12" id="recipe-count">
+            <h5 class="recipe-count">Found a total of {{count}} recipes</h5>
+        </div>
         {% for recipe in recipes %}
         <div class="col-sm-6 col-lg-4 nonblur" id="cards">
             <a class="link-text" href="/{{recipe._id}}">

@@ -3,8 +3,19 @@
 <section class="single-recipe-section" id="top">
     <div class="row">
         <div class="col-12 p-5">
-            <h2 class="text-white">{{ username }}<small class="small-text text-white"> User has created <b>{{ count }}</b> recipes</small></h2>
+            <h2 class="text-white">{{ username }}</h2>
             <hr class="light-long-hr">
+        </div>
+        <div class="col-6 mb-4 text-center">
+            <h5 class="text-white">Recipes</h5>
+            <hr class="hr light">
+            <small class="small-text text-white"> User has created <b>{{ count }}</b> recipes</small>
+        </div>
+        
+        <div class="col-6 mb-4 text-center">
+            <h5 class="text-white">Upvotes</h5>
+            <hr class="hr light">
+            <small class="small-text text-white"> User has a total of  <b>{{ upvotes }}</b> upvotes!</small>
         </div>
     </div>
     

@@ -16,10 +16,9 @@
         </div>
 
 
-        <div class="col-lg-7 pl-0">
-            
+        <div class="col-lg-7 pl-3">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                     <h2 class="recipe-title text-white">{{ recipe.title }}</h2>
                     <small class="username-text">Submitted by <a class="username-text" href="/user/{{recipe.username}}"> {{ recipe.username }} </a></small>
                     <hr class="light-long-hr">
@@ -105,9 +104,9 @@
             </ul>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-8">
             {% for step in recipe.steps %}
-            <div class="row width-100">
+            <div class="row width-100 text-center">
                 <div class="col-12 step-div">
                     <h4 class="orange-text steps-header">Step #{{loop.index}}</h4>
                     <hr class="card-hr">

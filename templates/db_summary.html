@@ -5,34 +5,48 @@
         <div class="col-12">
             <h1 class="text-center">Recipe Database Summary</h1>
             <hr class="hr">
+            <p>Click on the chart slices to apply filters. All 3 charts will update to accurately display a count of recipes with those filters.</p>
+            <small class="graph-example">For example, clicking on the 'fast' filter will update all 3 charts to show how many of each meal type is fast, 
+            how many fast meals there are in total and the amount of fast meals that are cheap, medium or expensive. 1 filter can be applied to each chart.</small>
+            <hr class="hr">    
         </div>
     </div>
 
     <!-- graph 1 placeholder -->
-    <div class="row">
+    <div class="row text-center">
         <div class="col-12">
-            <div id="meat-chart" style="width: 900px; height: 500px;"></div>
+            <h4 class="graph-header">Meal Category</h4>
+            <div id="meat-chart" class="chart"></div>
+            <button id="meal-category-reset-button" class="btn btn-primary">RESET MEAL CATEGORY</button>
+            <hr class="hr">
         </div>
     </div>
 
     <!-- graph 2 placeholder -->
-    <div class="row">
+    <div class="row text-center">
         <div class="col-12">
-            <div id="time-chart" style="width: 900px; height: 500px;"></div>
+            <h4 class="graph-header">Time Taken</h4>
+            <div id="time-chart" class="chart"></div>
+            <button id="time-reset-button" class="btn btn-primary">RESET TIME</button>
+            <hr class="hr">
         </div>
     </div>
 
     <!-- graph 3 placeholder -->
-    <div class="row">
+    <div class="row text-center">
         <div class="col-12">
-            <div id="price-chart" style="width: 900px; height: 500px;"></div>
+            <h4 class="graph-header">Meal Price</h4>
+            <div id="price-chart" class="chart"></div>
+            <button id="price-reset-button" class="btn btn-primary">RESET PRICE</button>
+            <hr class="hr">
         </div>
     </div>
     
-    <button id="reset-button">RESET</button>
-    <button id="meal-category-reset-button">RESET MEAL CATEGORY</button>
-    <button id="time-reset-button">RESET TIME</button>
-    <button id="price-reset-button">RESET PRICE</button>
+    <div class="row text-center">
+        <div class="col-12">
+            <button id="reset-button" class="btn btn-primary">RESET ALL FILTERS</button>
+        </div>
+    </div>
 
 </section>
 

@@ -21,22 +21,28 @@ function drawChart() {
     var priceChart = new google.visualization.PieChart(document.getElementById('price-chart'));
     var priceChartData;
     
+    var options = {
+        pieSliceText: "value",
+        backgroundColor: "transparent"
+        
+    };
+    
     function updateMeatChart(data) {
         
         meatChartData = data;
-        meatChart.draw(meatChartData);
+        meatChart.draw(meatChartData, options);
     }
     
     function updateTimeChart(data) {
         
         timeChartData = data;
-        timeChart.draw(timeChartData);
+        timeChart.draw(timeChartData, options);
     }
     
     function updatePriceChart(data) {
         
         priceChartData = data;
-        priceChart.draw(priceChartData);
+        priceChart.draw(priceChartData, options);
     }
     
     updateChartData();
@@ -106,8 +112,14 @@ function drawChart() {
         
     });
     
-        
+    // resize charts on window size change
+    $(window).resize(function(){
+	  	updateChartData();
+	});
+   
 }
+
+
 
 
 
