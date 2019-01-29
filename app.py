@@ -178,7 +178,8 @@ def update_recipe(recipe_id):
         "steps": filtered_steps_list
     }
     
-    mongo.db.recipe.update_one({"_id": ObjectId(recipe_id)}, {"$set": recipe_dict})
+    mongo.db.recipe.update_one({"_id": str(ObjectId(recipe_id))}, {"$set": recipe_dict})
+    
     return redirect("/" + recipe_id)
 
 ## upvote function
