@@ -139,6 +139,32 @@ Below is a list of the specific tests that I ran manually.
 * Check the individual reset buttons work and that all 3 charts change to accomodate the change in filters.
 * Make sure the reset all button works.
 
+
+##### Database Schema
+
+The database has 2 collections, meal category and recipe. The meal category collection contains the 7 meal categories that 
+are currently available for a user to filter, select when they add new recipes etc. These are in a seperate collection so that it would be
+easier to potentially add new meal categories in the future with very little to no editing required in the html or python code.
+
+The recipe collection is where the individual recipes are stored in the form of documents. Each document has the 
+same keys, to make displaying them on the webpage simply.
+
+Each recipe has these Keys:
+
+* Username - Used so later I can identify recipes made by the same person
+* Title - Title of the recipe, displayed on the individual recipe and the menu page.
+* Meal Category - links to the other collection. Selected when the user adds a recipe
+* Steps - This is a list of steps that the user inputs. The amount of steps in the list depends entirely on how many the user adds themself on the add recipe page.
+* Ingredients - Also a list, that the user inputs as well.
+* Upvotes - By default is 1. Each individual recipe page has buttons to up or downvotes, which edits this number in the database
+* Price - Either cheap, medium or expensive. User input on the add recipe page for this too.
+* Time - Fast, Medium or Long. User input
+* Calories - Low, Medium or High. Also a user input on the add page.
+ 
+Price, time and calories are all displayed on the individual and menu pages, with different icons depending on 
+the value.
+
+
 ## Deployment
 
 The site is deployed on heroku and can be found at https://thurcos-cook-book.herokuapp.com/
